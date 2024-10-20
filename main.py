@@ -1,10 +1,46 @@
 import telebot
-
+import os
+import random
+import requests
 API_TOKEN = "<api_token>"
 
-bot = telebot.TeleBot(My_ToKeN)
+bot = telebot.TeleBot('7976398571:AAF1maIY7bVLPR4Frct9YQSM7a8sqroAdUg')
+img = random.randint(0, 3)
 
+if img == 0:
+    @bot.message_handler(commands=['mem'])
+    def send_mem(message):
+        with open("images/mem1.jpeg", 'rb') as f:
+            bot.send_photo(message.chat.id, f)
+            
+elif img == 1:
+    @bot.message_handler(commands=['mem'])
+    def send_mem(message):
+        with open("images/mem2.jpeg", 'rb') as d:
+            bot.send_photo(message.chat.id, d)
+            
+elif img == 2 or 3:
+    @bot.message_handler(commands=['mem'])
+    def send_mem(message):
+        with open("images/mem3.jpeg", 'rb') as c:
+            bot.send_photo(message.chat.id, c)
+            
+def get_duck_image_url():    
+        url = 'https://random-d.uk/api/random'
+        res = requests.get(url)
+        data = res.json()
+        return data['url']
 
+@bot.message_handler(commands=['pymem'])
+def send_mem(message):
+    with open("images/mem4.jpg", 'rb') as v:
+        bot.send_photo(message.chat.id, v)
+    
+@bot.message_handler(commands=['duck'])
+def duck(message):
+        '''По команде duck вызывает функцию get_duck_image_url и отправляет URL изображения утки'''
+        image_url = get_duck_image_url()
+        bot.reply_to(message, image_url)
 @bot.message_handler(commands=["poll"])
 def create_poll(message):
     bot.send_message(message.chat.id, "English Article Test")
