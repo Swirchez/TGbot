@@ -4,7 +4,7 @@ import random
 import requests
 API_TOKEN = "<api_token>"
 
-bot = telebot.TeleBot('7976398571:AAF1maIY7bVLPR4Frct9YQSM7a8sqroAdUg')
+bot = telebot.TeleBot('TOKEN')
 img = random.randint(0, 3)
 
 if img == 0:
